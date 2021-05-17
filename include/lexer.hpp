@@ -2,7 +2,7 @@
 #define __LEXER_HPP__
 
 #ifndef yyFlexLexerOnce
-#include <FlexLexer.h>
+#include "FlexLexer.h"
 #endif
 
 #include "parser.tab.hh"
