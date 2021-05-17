@@ -28,7 +28,7 @@ $(PARSER): $(LYOBJ) $(YACCOBJ) $(FLEXOBJ) $(MODULES) $(PARSER).o
 	$(CC) -o $@ $^
 
 $(FLEXCPP): $(FLEXSRC)
-	flex --outfile=$@ $<
+	flex -CFr --outfile=$@ $<
 
 $(YACCCPP): $(YACCSRC)
 	yacc -Wno-yacc --defines=$(YACCHDR) --output=$@ $<

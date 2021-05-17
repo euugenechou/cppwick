@@ -11,6 +11,7 @@ whitespace  ([ \t]+)
 %option noyywrap
 %option noinput
 %option nounput
+%option batch
 
 %%
 {whitespace}  ;
