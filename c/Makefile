@@ -1,7 +1,7 @@
 CC = g++ -std=c++17
 CFLAGS = -Wall -Werror -Wpedantic -Werror -Wno-register -Ofast
 
-JSON = json
+JSON = fwjson
 PARSER = fwparser
 EXECS = $(JSON) $(PARSER)
 
