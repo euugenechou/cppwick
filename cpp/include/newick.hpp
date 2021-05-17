@@ -14,7 +14,7 @@ class NewickTree {
     std::string label;
     std::vector<NewickTree *> *children;
 
-    NewickTree(std::string *label, double length,
+    NewickTree(const char *label, double length,
                std::vector<NewickTree *> *children);
     ~NewickTree();
 

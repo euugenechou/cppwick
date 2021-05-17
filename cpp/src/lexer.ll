@@ -3,10 +3,9 @@
   #include "lexer.hpp"
 
   #undef YY_DECL
-  #define YY_DECL int Flywick::Lexer::yylex(Flywick::Parser::semantic_type *lval, Flywick::Parser::location_type *loc)
+  #define YY_DECL int Flywick::Lexer::yylex(Flywick::Parser::semantic_type *lval)
 
   #define YY_NO_UNISTD_H
-  #define YY_USER_ACTION loc->step(); loc->columns(yyleng);
 
   using token = Flywick::Parser::token;
 %}
@@ -15,6 +14,7 @@
 %option noyywrap
 %option noinput
 %option nounput
+%option batch
 %option c++
 
 label       ([^\,\;\:\(\)\[\]]+)
@@ -36,7 +36,7 @@ whitespace  ([ \t]+)
 ")"   { return ')'; }
 
 {label} {
-  yylval->label = new std::string(yytext);
+  yylval->label = strdup(yytext);
   return token::LABEL;
 }
 

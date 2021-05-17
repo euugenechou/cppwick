@@ -2,9 +2,9 @@
 #include <queue>
 #include <unordered_map>
 
-NewickTree::NewickTree(std::string *label_, double length_,
+NewickTree::NewickTree(const char *label_, double length_,
                        std::vector<NewickTree *> *children_) {
-    label = *label_;
+    label = label_;
     length = length_;
     children = children_;
 }
@@ -80,7 +80,7 @@ NewickTree *NewickTree::from_json(const Json &tree) {
 
     std::string label = tree["label"].get<std::string>();
     double length = tree["length"].get<double>();
-    return new NewickTree(&label, length, children);
+    return new NewickTree(label.c_str(), length, children);
 }
 
 void NewickTree::annotate_json(Json &tree, const Json &annotations) {

@@ -17,8 +17,7 @@ class Lexer : public yyFlexLexer {
     virtual ~Lexer(){};
 
     using FlexLexer::yylex;
-    virtual int yylex(Flywick::Parser::semantic_type *lval,
-                      Flywick::Parser::location_type *loc);
+    virtual int yylex(Flywick::Parser::semantic_type *lval);
 };
 } // namespace Flywick
 

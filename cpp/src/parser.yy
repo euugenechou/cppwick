@@ -42,13 +42,11 @@
 
 %define parse.assert
 
-%locations
-
 %union {
-    std::string *label;
+    char *label;
     double length;
     NewickTree *tree;
-    std::tuple<std::string *, double> *info;
+    std::tuple<char *, double> *info;
     std::vector<NewickTree *> *children;
 }
 
@@ -71,7 +69,7 @@ newick
 node
     : subtree info {
         $$ = new NewickTree(std::get<0>(*$2), std::get<1>(*$2), $1);
-        delete std::get<0>(*$2);
+        free(std::get<0>(*$2));
         delete $2;
     }
     ;
@@ -82,10 +80,10 @@ subtree
     ;
 
 info
-    : label         { $$ = new std::tuple<std::string *, double>{ $1, -1.0 }; }
-    | length        { $$ = new std::tuple<std::string *, double>{ new std::string(""), $1 }; }
-    | label length  { $$ = new std::tuple<std::string *, double>{ $1, $2 }; }
-    |               { $$ = new std::tuple<std::string *, double>{ new std::string(""), -1.0 }; }
+    : label         { $$ = new std::tuple<char *, double>{ $1, -1.0 }; }
+    | length        { $$ = new std::tuple<char *, double>{ strdup(""), $1 }; }
+    | label length  { $$ = new std::tuple<char *, double>{ $1, $2 }; }
+    |               { $$ = new std::tuple<char *, double>{ strdup(""), -1.0 }; }
     ;
 
 children
@@ -102,7 +100,6 @@ length
     ;
 %%
 
-void Flywick::Parser::error(const location_type &loc,
-                            const std::string &err) {
-    std::cerr << "Error: " << err << " at " << loc << std::endl;
+void Flywick::Parser::error(const std::string &err) {
+    std::cerr << "Error: " << err << std::endl;
 }

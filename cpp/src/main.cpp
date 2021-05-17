@@ -3,8 +3,8 @@
 #include <iostream>
 
 int main(void) {
+    std::ios::sync_with_stdio(false);
     Flywick::Reader reader;
     NewickTree *root = reader.parse(std::cin);
-    std::cout << root->to_json().dump(2) << std::endl;
     return 0;
 }

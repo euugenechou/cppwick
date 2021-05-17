@@ -17,8 +17,6 @@ set(CMAKE_CXX_FLAGS "-std=c++17 -Wno-register -Ofast")
 
 file(GLOB SRC src/*.cpp)
 
-message(STATUS ${SRC})
-
 add_executable(parser
   ${SRC}
   ${FLEX_lexer_OUTPUTS}
